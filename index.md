@@ -13,5 +13,5 @@ Aspiring cybersecurity professional focused on security analysis, threat detecti
 - [Certifications](certs.md)
 
 ## Contact
-- [LinkedIn](www.linkedin.com/in/al-mohian)
+- [LinkedIn](https://www.linkedin.com/in/al-mohian)
 - [GitHub](https://github.com/MusannaMohian)
