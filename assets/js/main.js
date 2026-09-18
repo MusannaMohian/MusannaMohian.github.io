@@ -1,13 +1,12 @@
 (function () {
   "use strict";
 
-  // Theme toggle — dark is the CSS default regardless of OS preference,
-  // so "no attribute set" always means dark here.
+  // Theme toggle — light (warm paper) is the CSS default.
   var toggle = document.getElementById("theme-toggle");
   if (toggle) {
     toggle.addEventListener("click", function () {
       var root = document.documentElement;
-      var current = root.getAttribute("data-theme") || "dark";
+      var current = root.getAttribute("data-theme") || "light";
       var next = current === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("am-theme", next); } catch (e) {}
@@ -16,15 +15,15 @@
 
   // Mobile nav toggle
   var navToggle = document.getElementById("nav-toggle");
-  var indexRail = document.getElementById("index-rail");
-  if (navToggle && indexRail) {
+  var mobileNav = document.getElementById("mobile-nav");
+  if (navToggle && mobileNav) {
     navToggle.addEventListener("click", function () {
-      var isOpen = indexRail.classList.toggle("open");
+      var isOpen = mobileNav.classList.toggle("open");
       navToggle.setAttribute("aria-expanded", String(isOpen));
     });
-    indexRail.querySelectorAll("a").forEach(function (link) {
+    mobileNav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        indexRail.classList.remove("open");
+        mobileNav.classList.remove("open");
         navToggle.setAttribute("aria-expanded", "false");
       });
     });
@@ -51,29 +50,26 @@
     }
   }
 
-  // Scrollspy for right-hand index nav (home page sections only)
-  var sections = document.querySelectorAll("main [id]");
-  var navLinks = document.querySelectorAll(".index-list a[data-nav]");
-  if (sections.length && navLinks.length) {
-    var map = {};
-    navLinks.forEach(function (link) {
-      var key = link.getAttribute("data-nav");
-      map[key] = link;
-    });
-    if ("IntersectionObserver" in window) {
-      var spy = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var id = entry.target.id;
-              navLinks.forEach(function (l) { l.classList.remove("active"); });
-              if (map[id]) map[id].classList.add("active");
-            }
-          });
-        },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
-      );
-      sections.forEach(function (el) { spy.observe(el); });
-    }
+  // Underline the active nav link while its section is in view (home page only)
+  var navLinks = document.querySelectorAll(".primary-nav a[href*='#']");
+  var sectionIds = ["top", "about", "skills", "work", "contact"];
+  var sections = sectionIds
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+  if (sections.length && navLinks.length && "IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            navLinks.forEach(function (l) {
+              l.classList.toggle("active", l.getAttribute("href").indexOf("#" + id) !== -1);
+            });
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    sections.forEach(function (el) { spy.observe(el); });
   }
 })();
