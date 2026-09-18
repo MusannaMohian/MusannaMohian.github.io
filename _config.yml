@@ -1,6 +1,8 @@
-title: Al Mohian | Cybersecurity Portfolio
+title: Al Mohian
+site_name: Al Mohian
+tagline: Cybersecurity Portfolio
 description: >-
   Portfolio of Al Mohian — aspiring cybersecurity professional focused on
   security operations, threat detection, and incident response.
-theme: jekyll-theme-cayman
-show_downloads: false
+url: "https://musannamohian.github.io"
+markdown: kramdown
