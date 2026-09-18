@@ -1,6 +1,12 @@
-# Projects
-
+---
+layout: default
+title: Projects
+eyebrow: Hands-on work
+subtitle: Practical builds pairing offensive tooling with defensive monitoring.
+permalink: /projects/
+---
 ## Build & Breach
+
 A self-built vulnerable network lab designed to practice both sides of security:
 attacking it with Nmap, Burp Suite, and Metasploit, then monitoring and detecting
 that activity with a Wazuh SIEM deployment. The goal is to understand offence and
@@ -12,5 +18,3 @@ a defender actually sees.
 **Tools:** Nmap, Burp Suite, Metasploit, Wazuh
 
 Full repo and write-ups will be linked here once published.
-
-[← Back to home](index.md)
