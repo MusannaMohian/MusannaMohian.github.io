@@ -5,9 +5,9 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="shell">
-    {% include sidebar.html %}
-    <main id="main" class="panel">
+  {% include nav.html %}
+  <main id="main">
+    <div class="page">
       <header class="page-header">
         {% if page.eyebrow %}<p class="eyebrow">{{ page.eyebrow }}</p>{% endif %}
         <h1>{{ page.title }}</h1>
@@ -18,12 +18,10 @@
         {{ content }}
       </div>
 
-      <footer class="page-footer">
-        <a href="{{ '/' | relative_url }}">← Back to home</a>
-      </footer>
-    </main>
-    {% include rightnav.html %}
-  </div>
+      <p class="back-link"><a href="{{ '/' | relative_url }}">← Back to home</a></p>
+    </div>
+  </main>
+  {% include foot.html %}
   <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
 </body>
 </html>
